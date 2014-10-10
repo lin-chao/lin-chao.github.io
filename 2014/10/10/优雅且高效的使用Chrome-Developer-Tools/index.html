@@ -3,17 +3,55 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lin-chao</title>
+  <title>优雅且高效的使用Chrome Developer Tools | lin-chao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="my blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="lin-chao">
-<meta property="og:url" content="http://lin-chao.github.io/">
+  <meta name="description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
+记录ex的 $_
+$_是上一次表达式的计算结果。
+举个例子： 需要计算每天和每年都有多少秒。
+很简单：
+
+记录现任的 $0
+调试的时候，很方便的取到选择的dom
+
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优雅且高效的使用Chrome Developer Tools">
+<meta property="og:url" content="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/">
 <meta property="og:site_name" content="lin-chao">
-<meta property="og:description" content="my blog">
+<meta property="og:description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
+记录ex的 $_
+$_是上一次表达式的计算结果。
+举个例子： 需要计算每天和每年都有多少秒。
+很简单：
+
+记录现任的 $0
+调试的时候，很方便的取到选择的dom
+
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome%24_.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome%240.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_seletor.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_copy.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_debug1.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_debug2.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_dir.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_event.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_monitor.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_monitorEvent.png">
+<meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_table.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lin-chao">
-<meta name="twitter:description" content="my blog">
+<meta name="twitter:title" content="优雅且高效的使用Chrome Developer Tools">
+<meta name="twitter:description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
+记录ex的 $_
+$_是上一次表达式的计算结果。
+举个例子： 需要计算每天和每年都有多少秒。
+很简单：
+
+记录现任的 $0
+调试的时候，很方便的取到选择的dom
+
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
 
   
     <link rel="alternative" href="/atom.xml" title="lin-chao" type="application/atom+xml">
@@ -65,9 +103,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-优雅且高效的使用Chrome-Developer-Tools" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-优雅且高效的使用Chrome-Developer-Tools" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/" class="article-date">
   <time datetime="2014-10-10T06:45:46.000Z" itemprop="datePublished">10月 10 2014</time>
@@ -80,8 +116,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/">优雅且高效的使用Chrome Developer Tools</a>
+    <h1 class="article-title" itemprop="name">
+      优雅且高效的使用Chrome Developer Tools
     </h1>
   
 
@@ -176,65 +212,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/09/hello-world/" class="article-date">
-  <time datetime="2014-10-09T11:42:05.000Z" itemprop="datePublished">10月 9 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/09/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2014/10/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/10/09/hello-world/" data-id="j5cp5nzd69rlztgw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
