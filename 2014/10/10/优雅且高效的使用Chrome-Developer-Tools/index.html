@@ -8,13 +8,13 @@
   <meta name="description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
 记录ex的 $_
 $_是上一次表达式的计算结果。
-举个例子： 需要计算每天和每年都有多少秒。
+举个例子： 需要计算每天,每年都有多少秒。
 很简单：
 
 记录现任的 $0
-调试的时候，很方便的取到选择的dom
+调试的时候，很方便的取到选择的dom节点
 
-另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="优雅且高效的使用Chrome Developer Tools">
 <meta property="og:url" content="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/">
@@ -22,13 +22,13 @@ $_是上一次表达式的计算结果。
 <meta property="og:description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
 记录ex的 $_
 $_是上一次表达式的计算结果。
-举个例子： 需要计算每天和每年都有多少秒。
+举个例子： 需要计算每天,每年都有多少秒。
 很简单：
 
 记录现任的 $0
-调试的时候，很方便的取到选择的dom
+调试的时候，很方便的取到选择的dom节点
 
-另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个">
 <meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome%24_.png">
 <meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome%240.png">
 <meta property="og:image" content="http://linchaoblogimg.qiniudn.com/chrome_seletor.png">
@@ -45,13 +45,13 @@ $_是上一次表达式的计算结果。
 <meta name="twitter:description" content="Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。
 记录ex的 $_
 $_是上一次表达式的计算结果。
-举个例子： 需要计算每天和每年都有多少秒。
+举个例子： 需要计算每天,每年都有多少秒。
 很简单：
 
 记录现任的 $0
-调试的时候，很方便的取到选择的dom
+调试的时候，很方便的取到选择的dom节点
 
-另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更">
+另外$1 $2 $3 $4 是前几次选择的dom，不过这几个">
 
   
     <link rel="alternative" href="/atom.xml" title="lin-chao" type="application/atom+xml">
@@ -128,11 +128,11 @@ $_是上一次表达式的计算结果。
         <p>Chrome Developer Tools是前端开发不可缺少的利器，这里介绍几个有趣的Command Line API，使得开发调试过程中，不经意的透露出那点点的优雅。</p>
 <h2 id="记录ex的_$_">记录ex的 $_</h2>
 <p>$_是上一次表达式的计算结果。</p>
-<p>举个例子： 需要计算每天和每年都有多少秒。</p>
+<p>举个例子： 需要计算每天,每年都有多少秒。</p>
 <p>很简单：</p>
 <p><img src="http://linchaoblogimg.qiniudn.com/chrome%24_.png" alt="image"></p>
 <h2 id="记录现任的_$0">记录现任的 $0</h2>
-<p>调试的时候，很方便的取到选择的dom</p>
+<p>调试的时候，很方便的取到选择的dom节点</p>
 <p><img src="http://linchaoblogimg.qiniudn.com/chrome%240.png" alt="image"></p>
 <p>另外$1 $2 $3 $4 是前几次选择的dom，不过这几个就更不常用了。</p>
 <h2 id="简洁的_$(selector)_和_$$(selector)">简洁的 $(selector) 和 $$(selector)</h2>
@@ -142,7 +142,7 @@ $_是上一次表达式的计算结果。
 <p>或者是</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.querySelectorAll()</div></pre></td></tr></table></figure>
 
-<p>其实在Chrome中他们两个非常好的基友，分别是$(selector) 与 $$(selector)。有了这两位以后，再也不要输入那么长的API了。</p>
+<p>其实在Chrome中他们又两个好基友，分别是$(selector) 与 $$(selector)。有了这两位以后，再也不要输入那么长的API了。</p>
 <p><img src="http://linchaoblogimg.qiniudn.com/chrome_seletor.png" alt="image"></p>
 <h2 id="拷贝Object的_copy(Object)">拷贝Object的 copy(Object)</h2>
 <p>右键复制HTML？不，有更好的：</p>
@@ -168,7 +168,7 @@ $_是上一次表达式的计算结果。
 <p><img src="http://linchaoblogimg.qiniudn.com/chrome_monitor.png" alt="image"></p>
 <p>如果需要监控事件被调用了几次、event对象是什么：</p>
 <p><img src="http://linchaoblogimg.qiniudn.com/chrome_monitorEvent.png" alt="image"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">monitorEvents(<span class="built_in">window</span>, <span class="string">"resize"</span>);</div><div class="line">monitorEvents(<span class="built_in">window</span>, [<span class="string">"resize"</span>, <span class="string">"scroll"</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">monitorEvents(<span class="built_in">window</span>, <span class="string">"resize"</span>);</div><div class="line">unmonitorEvents(<span class="built_in">window</span>, <span class="string">"resize"</span>);</div><div class="line">monitorEvents(<span class="built_in">window</span>, [<span class="string">"resize"</span>, <span class="string">"scroll"</span>])</div><div class="line">unmonitorEvents(<span class="built_in">window</span>, [<span class="string">"resize"</span>, <span class="string">"scroll"</span>])</div></pre></td></tr></table></figure>
 
 <p>可以监控的事件有：</p>
 <table>
@@ -204,7 +204,7 @@ $_是上一次表达式的计算结果。
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/" data-id="cd6bbxm8cy656vs0" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/" data-id="g1uxjqdsx4isxmhk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li></ul>
