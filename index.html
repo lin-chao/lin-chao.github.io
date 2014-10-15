@@ -63,9 +63,81 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-优雅且高效的使用Chrome-Developer-Tools" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-优雅且高效的使用Chrome-Developer-Tools下" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/" class="article-date">
+    <a href="/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/" class="article-date">
+  <time datetime="2014-10-15T03:04:17.000Z" itemprop="datePublished">10月 15 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/">优雅且高效的使用Chrome-Developer-Tools（下）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前有分享到我们可以通过 <a href="http://lin-chao.github.io/2014/10/10/%E4%BC%98%E9%9B%85%E4%B8%94%E9%AB%98%E6%95%88%E7%9A%84%E4%BD%BF%E7%94%A8Chrome-Developer-Tools%E4%B8%8A/" target="_blank" rel="external">Command Line API</a> 来提高我们的开发效率。除此之外，还有一些比较有趣的快捷键和调试方法，也能帮助提高大家的生产效率。<br>几个小事项：<br>1.文中提到的快捷键 command 在WIN下都是对应Ctrl；<br>2.当焦点在dev tools上时，快捷键才有效~。</p>
+<h3 id="随意的文件跳转">随意的文件跳转</h3>
+<p>使用Sublime的同学，一定非常喜欢command + p，这种随意的文件跳转，其实dev tools中也有类似的跳转，而且快捷键也是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">command + p  <span class="comment">// 跳转到对应文件</span></div><div class="line">command + p + : + 数字 <span class="comment">// 跳转到对应文件对应行</span></div></pre></td></tr></table></figure>
+
+<p><img src="http://linchaoblogimg.qiniudn.com/commandp.gif" alt="随意的文件跳转"></p>
+<p>是不是再也不用在Sources中，用鼠标一个一个找文件了。</p>
+<h3 id="随意的方法跳转">随意的方法跳转</h3>
+<p>Sublime中，command + R是跳转到方法，漂亮的是 dev tools中也有类似的快捷键：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">command + shift + o</div></pre></td></tr></table></figure>
+
+<p>来，我们先用command + p打开一个文件，然后command + shift + o,跳转到任意一个方法。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/commando.gif" alt="随意的方法跳转"></p>
+<h3 id="灵活的断点设置，我要你停你才停">灵活的断点设置，我要你停你才停</h3>
+<p>很多时候，需要在循环中打个断点，着实麻烦，不得不一次又一次的运行循环，直到我们需要的那个条件时候停止，手快的时候多按了，那就只好从头再来一次了。</p>
+<p>我们在断点的时候是可以设置一个 Breakpoint 的,满足条件的时候才停止，下图演示了一个，当消息id为所确定消息时候，断点才生效。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/breakpoint.gif" alt="灵活的断点设置"></p>
+<h3 id="快速打开关闭Console">快速打开关闭Console</h3>
+<p>屏幕不是很大的时候，一般都都会关掉Console，使得代码的可视范围能大一些，然后通过点击右上角的Show/Hide drawer按钮来打开或者关闭Console。其实这时候，可以快捷的使用ESC键来打开或者关闭Console。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/chromeesec.gif" alt="快速打开关闭Console"></p>
+<h3 id="Elements页卡中几个有用的快捷键">Elements页卡中几个有用的快捷键</h3>
+<p>1.方向键快速选择，上下键快速导航，左右键收起展开；</p>
+<p>2.enter快速编辑属性；</p>
+<p>3.tab属性切换；</p>
+<p>4.H键快速隐藏dom，知道这个快捷键之前，我要么删除dom看效果，要么手工输入display:none，有H就方便多了。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/123.gif" alt="Elements"></p>
+<h3 id="指定的XHR断点">指定的XHR断点</h3>
+<p>有时候，我们需要在指定的xhr请求的时候，有一个断点，那可以这样：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/xhrpoint.gif" alt="指定的XHR断点"></p>
+<p>然后可以通过call stack快速的找到对应的代码。</p>
+<h3 id="快速模拟移动设备">快速模拟移动设备</h3>
+<p>打开dev tools，然后执行以下快捷键：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">command + shift + M <span class="comment">// 切换模拟Device</span></div><div class="line">command + shift + R <span class="comment">// 刷新页面。</span></div></pre></td></tr></table></figure>
+
+<p><img src="http://linchaoblogimg.qiniudn.com/device.gif" alt="模拟移动设备"></p>
+<p>另外，强烈建议大家都升级到chrome 38以上版本，可以模拟网络环境，对移动开发真是在好不过了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://lin-chao.github.io/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/" data-id="rgr008lem509ljo0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-优雅且高效的使用Chrome-Developer-Tools上" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/" class="article-date">
   <time datetime="2014-10-10T06:45:46.000Z" itemprop="datePublished">10月 10 2014</time>
 </a>
     
@@ -77,7 +149,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/">优雅且高效的使用Chrome Developer Tools</a>
+      <a class="article-title" href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/">优雅且高效的使用Chrome Developer Tools（上）</a>
     </h1>
   
 
@@ -164,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/" data-id="k6nhoe4fdti1nbcd" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/" data-id="3ccbbabb42w492n2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li></ul>
@@ -205,7 +277,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -217,7 +289,11 @@
       <ul>
         
           <li>
-            <a href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools/">优雅且高效的使用Chrome Developer Tools</a>
+            <a href="/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/">优雅且高效的使用Chrome-Developer-Tools（下）</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/">优雅且高效的使用Chrome Developer Tools（上）</a>
           </li>
         
       </ul>
