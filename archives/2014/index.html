@@ -85,26 +85,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="android_input[type=file]的问题">android  input[type=file]的问题</h3>
+        <h3 id="Android_input[type=file]的问题">Android  input[type=file]的问题</h3>
 <p>4.4.1/4.4.2系统，webview不再回调WebViewClient.openFileChooser方法</p>
 <pre><code> 在<span class="number">4.4</span>系统以前，客户端如果需要对H5的&lt;<span class="built_in">input</span>&gt;标签做支持，即在H5支持选择文件的功能，可以通过重写WebViewClient非public的
  openFileChooser方法来实现。但在<span class="number">4.4</span>.<span class="number">1</span>/<span class="number">4.4</span>.<span class="number">2</span>系统中，该回调方法被废弃，客户端无法捕获用户在H5页面上对&lt;<span class="built_in">input</span>&gt;标签的点击。
-</code></pre><p>谷歌官方也未对此给出任何解释或可行的替代方案：<a href="https://code.google.com/p/android/issues/detail?id=62220" target="_blank" rel="external">参考链接</a></p>
-<p>严格的说，这个不是微信的问题，基于这些版本的android的webview都会有相关的问题，建议先尝试最简单的页面来判断是否是android系统版本的问题。</p>
+</code></pre><p>谷歌官方也未对此给出任何解释或可行的替代方案：<a href="https://code.google.com/p/Android/issues/detail?id=62220" target="_blank" rel="external">参考链接</a></p>
+<p>严格的说，这个不是微信的问题，基于这些版本的Android的webview都会有相关的问题，建议先尝试最简单的页面来判断是否是Android系统版本的问题。</p>
 <p>另外，当使用HTML5 pushState API改变了页面URL以后，也会到导致input[type=file]失效。</p>
-<h3 id="android_jsApi权限先有后无的问题">android jsApi权限先有后无的问题</h3>
-<p>可能原因有很多，有一种原因是：<br>页面用了HTML5 pushState API导致页面URL变化了。<br>可以这么理解，因为你的URL变化了，微信认为你可能不是一个可信任的域名，所以会导致jsApi失效。</p>
-<p>建议，android下通过hash来控制页面变化，不要用pushState</p>
+<h3 id="Android_jsApi权限先有后无的问题">Android jsApi权限先有后无的问题</h3>
+<p>可能原因有很多，有一种原因是：</p>
+<p>页面用了HTML5 pushState API导致页面URL变化了。</p>
+<p>在Android下，用history.pushState改变地址栏时，不会触发微信webview的地址改变时的回调，所以微信无法判断到当前的URL是否有相关权限。</p>
+<p>建议，Android下通过hash来控制页面变化，不要用pushState</p>
 <h3 id="iOS下如何改变页面title">iOS下如何改变页面title</h3>
 <p>iOS下在微信中，通过document.tilte = “new title”的方式，不会使得title有变化，具体原因未知，但这里我们可以通过hack的方式来做到。</p>
 <p>看如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $body = $(<span class="string">'body'</span>);</div><div class="line">  <span class="built_in">document</span>.title = ‘title’</div><div class="line">  <span class="comment">// hack在微信等webview中无法修改document.title的情况</span></div><div class="line">  <span class="keyword">var</span> $iframe = $(<span class="string">'&lt;iframe src="/favicon.ico"&gt;&lt;/iframe&gt;'</span>).on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">      $iframe.off(<span class="string">'load'</span>).remove()</div><div class="line">    }, <span class="number">0</span>)</div><div class="line">  }).appendTo($body)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $body = $(<span class="string">'body'</span>)</div><div class="line"><span class="built_in">document</span>.title = ‘title’</div><div class="line"><span class="comment">// hack在微信等webview中无法修改document.title的情况</span></div><div class="line"><span class="keyword">var</span> $iframe = $(<span class="string">'&lt;iframe src="/favicon.ico"&gt;&lt;/iframe&gt;'</span>).on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    $iframe.off(<span class="string">'load'</span>).remove()</div><div class="line">  }, <span class="number">0</span>)</div><div class="line">}).appendTo($body)</div></pre></td></tr></table></figure>
 
+<h3 id="Android_下localStorage的问题">Android 下localStorage的问题</h3>
+<p>首先，微信的webview中是支持使用localStorage，并没有做限制。</p>
+<p>但是鉴于Android碎片化问题严重，的确是有发现一些机器不支持localStorage，这并不是微信做的限制，而是这个机器的系统就不支持，所以建议开发者做好兼容，对于不支持localStorage的机器也做好相关的工作，保证正常使用。</p>
+<h3 id="zepto的问题">zepto的问题</h3>
+<p>在做移动端开发的时候，通常建议使用更小更高效的 <a href="http://zeptojs.com/" target="_blank" rel="external">zepto</a> 来替代jQuery，作为基础库。</p>
+<p>但是，在非常旧版本的微信（微信4.5）中有一个问题，微信默认注入了zepto库，所以这时候如果开发者自己在引入一次，就会有一些问题。</p>
+<p>因为这么老版本的微信已经很少了，我们基本可以不关注，但是想要把工作做到100%的开发者，请做下兼容处理。</p>
+<h3 id="微信和QQBrowser">微信和QQBrowser</h3>
+<p>目前，5.4以后Android微信，如果发现系统中已经安装了QQBrowser,那么会自动调用他的X5内核来作为webview的内核。</p>
+<p>所以，如果有用户反馈问题，而在你的同型号同系统的机器上并不会有的话，建议关注下，是不是因为内核不同引起的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="fm1zj3c3kshondfd" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="msfgvbhw2ijwgrt9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li></ul>
@@ -178,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/" data-id="vl00g9uw1yuc13mj" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/" data-id="rtydez09pbqsrv3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li></ul>
@@ -291,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/" data-id="mhzfjfxf6wcghtf9" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/10/10/优雅且高效的使用Chrome-Developer-Tools上/" data-id="mvrekcwpdncwhljy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li></ul>
