@@ -63,6 +63,140 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-移动前端开发基础与优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/22/移动前端开发基础与优化/" class="article-date">
+  <time datetime="2014-11-22T13:09:53.000Z" itemprop="datePublished">11月 22 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/22/移动前端开发基础与优化/">移动前端开发基础与优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>企业号的二次开发，基本都会需要微信中展示网页，用于完成一些独有的定制化需求。这篇文章会简单的聊聊移动前端开发的基础，主要包括一些开发和调试技巧，还会简单的提一下如何通过加载瀑布流找出性能的瓶颈从而提高网页的加载速度。</p>
+<h3 id="使用fiddler来抓包和调试">使用fiddler来抓包和调试</h3>
+<p>这部分会介绍，如何把手机上的资源文件代理到PC上，以便开发和调试。</p>
+<p>需要先做一些简单的准备工作：</p>
+<ul>
+<li>一台带有无线网卡的PC或者笔记本电脑，然后将电脑和手机连接到同一个Wi-Fi网络中，并且保证二者是在同一个ip网段内的；</li>
+<li>在电脑上安装 <a href="http://www.telerik.com/fiddler" target="_blank" rel="external">Fiddler</a>;</li>
+<li>打开Fiddler在菜单栏中点击 Tools - Fiddler Options - Connections 中按照如下配置后重启下fiddle：</li>
+</ul>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevfiddleroptions.png?123" alt=""></p>
+<p>打开fiddle，鼠标mo到右上角的网络图标上，可以看到本机IP，如图是: 192.168.1.107</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevipaddress.png" alt=""></p>
+<p>现在打开手机的网络设置，把网络设置中的代理设置为上一步获取到IP地址，端口号填写8888，下图是iphone的设置方式，Android手机根据机器不同设置方式有所不同，这里就不一一举例了。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdeviphone.png" alt=""></p>
+<p>现在在手机上访问 腾讯网，如果一切顺利，会在Fiddle上看到请求的结果：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevqqcom.png" alt=""></p>
+<p>可以顺利抓包了以后，就可以考虑调试的问题，现在拿一个简单的页面来举例：<a href="http://lin-chao.github.io/sort/Quicksort.html" target="_blank" rel="external">调试页面</a></p>
+<p>抓包效果：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevex.png" alt=""></p>
+<p>假设，我们需要调试 quick.js, 它出了一点问题，那么注意Fiddler右边的AutoResponder，把quick.js拖动到这个地方，配置它映射到本地的quick.js。如图，注意需要选中箭头所指向的两个选择框：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevautorespond.png" alt=""></p>
+<p>上图的意思是，如果发现访问的是lin-chao.github.io/sort/script/quick.js 就用本地的quick.js来替换它。</p>
+<p>在本地文件开头加上：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="string">'hello, from fiddle!'</span>);</div></pre></td></tr></table></figure>
+
+<p>保存，然后在手机上刷新页面，马上就可以看到结果。</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/mbdevres.png" alt=""></p>
+<p>AutoResponder可以挂载html，css，js甚至是image，所以，开发者可以轻易的把所有的资源都代理到PC上，然后直接在手机上刷新来查看开发结果。</p>
+<h3 id="抓HTTPS的数据包">抓HTTPS的数据包</h3>
+<p>对于特别注意信息安全的企业，可能会用到 <a href="http://baike.baidu.com/view/14121.htm?fr=aladdin" target="_blank" rel="external">HTTPS</a> 的方式来加载网页，这时候，上一步的配置就不足以了。比如我们现在手机上访问 <a href="https://qy.weixin.qq.com" target="_blank" rel="external">企业号官网</a> 抓包效果如图：<br><img src="http://linchaoblogimg.qiniudn.com/mbdevhttps.png" alt=""></p>
+<p>只能看到请求，但是看不到具体的内容，这时候还需要多做两步配置：</p>
+<ul>
+<li>安装 <a href="http://www.telerik.com/fiddler/add-ons" target="_blank" rel="external">CertMaker for iOS and Android</a> 用来抓HTTPS的数据包；</li>
+<li>打开Fiddler，点击菜单栏上的 Tools - Fiddler Options - HTTPS,勾选上Decrypt HTTPS traffic ，然后重启Fiddler；</li>
+<li>打开手机，访问本机IP+8888，例如：192.168.1.107:8888, 点击 You can download the FiddlerRoot certificate 按照提示，在手机上安装证书，重启手机浏览器。</li>
+</ul>
+<p>这时候再访问企业号官网：<a href="https://qy.weixin.qq.com" target="_blank" rel="external">https://qy.weixin.qq.com</a><br><img src="http://linchaoblogimg.qiniudn.com/mbdevhttpsres.png" alt=""></p>
+<p>接下去，就是和非HTTPS的页面一样了，通过挂载的方式来开发和调试。</p>
+<h3 id="使用chrome_devtools来模拟移动端">使用chrome devtools来模拟移动端</h3>
+<p>通过挂载的方式来调试手机页面，还是不太方便，所以在开发移动前端页面的时候，我们一般会在PC上先做好大部分的开发工作，然后再去测试相关的手机系统，以便做好适配。在PC上开发的时候，可以借助Chrome Developer Tools来模拟手机页面。</p>
+<p>安装最新版本的Chrome（推荐39以上的版本），然后按F12，打开开发者工具，如图：<br><img src="http://linchaoblogimg.qiniudn.com/mbdevchrome.png" alt=""></p>
+<p>点击图右边箭头开启手机模拟，刷新页面，就可以模拟手机了；</p>
+<p>图左边箭头可以选择需要模拟的机器；</p>
+<p>甚至还可以选择网络状态，来模拟各种网络情况下的加载效果。</p>
+<p>更多具体的 Chrome 开发者工具介绍可以参考我之前两篇文章：</p>
+<p><a href="http://lin-chao.github.io/2014/10/10/%E4%BC%98%E9%9B%85%E4%B8%94%E9%AB%98%E6%95%88%E7%9A%84%E4%BD%BF%E7%94%A8Chrome-Developer-Tools%E4%B8%8A/" target="_blank" rel="external">优雅且高效的使用Chrome Developer Tools（上）</a> 和 <a href="http://lin-chao.github.io/2014/10/15/%E4%BC%98%E9%9B%85%E4%B8%94%E9%AB%98%E6%95%88%E7%9A%84%E4%BD%BF%E7%94%A8Chrome-Developer-Tools%E4%B8%8B/" target="_blank" rel="external">优雅且高效的使用Chrome-Developer-Tools（下）</a></p>
+<h3 id="基础架构选型">基础架构选型</h3>
+<p>1.放弃jQuery，拥抱zepto。绝大部分开发者都会非常熟悉jQuery，在移动端也就自然而然用jQuery来做基础库，但是在移动端我推荐用 [zepto]（<a href="http://zeptojs.com/）" target="_blank" rel="external">http://zeptojs.com/）</a> 来代替jQuery，理由：</p>
+<ul>
+<li>相比于jQuery，zepto在GZIP后，只有区区的9.3kb，更适合移动端；</li>
+<li>zepto的API同jQuery几乎是一模一样的，熟悉jQuery的同学非常容易上手；</li>
+</ul>
+<p>2.尽量使用CSS3动画。通常我们要在前端实现一个动画效果，主流就是两种方法：JS动画与CSS3动画。 通过JS动态改写样式实现动画，在现代的PC上问题基本不大，因为已经有足够强大计算能力和渲染能力去做了，而在移动端，受限于各种手机的机能，JS动画在一些机型上就会显得有些力不从心了，容易出现丢帧的现象，具体表现就是，感觉到卡顿，而浏览器原生实现的CSS3动画，就会流畅的很多，而且有非常自然的效果，体验会很好。不具体展开CSS3动画的具体实现方式，可以搜索引擎或者相关的书籍获取到使用方式，另外，推荐腾讯前端团队的文章：<a href="https://github.com/AlloyTeam/Mars/blob/master/performance/high-performance-css3-animation.md" target="_blank" rel="external">高性能 CSS3 动画</a></p>
+<p>3.用touch事件来代替click。在移动端，click会有300ms左右的延迟，所以会感觉点了后，过一会才有反应，推荐使用touch事件来处理click。开发者可以通过监听：touchstart,touchmove,touchend,touchcancel 这四个事件来实现传统PC上的click，scroll事件，或者直接使用zepto已经封装好的tap,singleTap,doubleTap,swipe, swipeLeft, swipeRight, swipeUp, swipeDown等事件。</p>
+<h3 id="找到瓶颈提高加载速度">找到瓶颈提高加载速度</h3>
+<p>企业号上线到现在，我们收到过很多起用户的投诉，抱怨微信OAuth太慢了，页面会白上很久，甚至是一些不通过OAuth的直接访问，都很慢。我跟了几个案例，发现问题基本都是出在企业具体侧，具体的业务做的不是很好，导致页面白了很久，就有一种很慢的感觉。这部分只是聊一下，怎么定位到瓶颈出现在哪里，不会谈到所有的情况，更多的关于优化相关的方法，以后可以详聊。</p>
+<p>开发者可以通过基本的加载瀑布图来找到性能瓶颈，然后加以优化，从而提高加载速度和体验。第一步还是在PC上，通过Chrome开发者工具来模拟调试。</p>
+<p>打开chrome开发者工具，选择手机模拟，然后选择3G网络，切换到Network面板，刷新页面，可以看服务器时间，每一个资源的加载的时间。</p>
+<p>拿一个最近遇到反馈的加载图举例：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/fanli.png" alt=""><br>左下角显示的加载时间4.34秒，也就是说如果3G用户在微信里面需要看等待4秒左右才看的到完整的页面，如果是2G的网络，那可想而知是会慢上更多的。</p>
+<p>HTML返回了以后，浏览器开始加载资源，一次发起5个资源请求，第6个资源video.js开始的时候是处于阻塞状态，直到apperance.css加载完成以后，才开始真正的加载。资源过大和阻塞是导致这个页面很慢的原因，也就是瓶颈所在。</p>
+<p>1.资源过大的问题：注意看size一栏，每一行的上一个数字是网络传输的数据大小，下一个数字是资源真实大小。可以注意到图中很多资源是传输大小是高于于实际大小的，可以判断出服务器没有对所有的资源开启 <a href="http://baike.baidu.com/view/966625.htm" target="_blank" rel="external">gzip</a> 压缩。从雅虎的数据来看，压缩通常能将响应的数据量减少近70%，这对于捉襟见肘的移动带宽而言是一个很不错的优化，数据传输的越快，页面显示的也会越早。以图中的jQuery为例，一个简单的表格做了一个对比：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">资源</th>
+<th style="text-align:right">大小</th>
+<th style="text-align:center">GZIP后大小</th>
+<th style="text-align:center">优化效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">jQuery2.1.1</td>
+<td style="text-align:right">82.3kb</td>
+<td style="text-align:center">29.6kb</td>
+<td style="text-align:center">32.9%</td>
+</tr>
+<tr>
+<td style="text-align:right">zepto</td>
+<td style="text-align:right">24.4kb</td>
+<td style="text-align:center">9.1kb</td>
+<td style="text-align:center">37.3%</td>
+</tr>
+</tbody>
+</table>
+<p>想一下，这里如果用zepto来代替jQuery,只有9.1kb，只有当前加载的11%。</p>
+<p>如果把所有的资源都做了gzip压缩以后，加载图如下：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/bloghasgzip.png?123" alt=""><br>整体时间下降到了3.09秒，优化了1.25秒，优化了28.8%。</p>
+<p>2.资源阻塞的问题：图中一共加载了3个JS、4个CSS，都没有做资源的合并。在PC端，现在高级的浏览器和带宽，使得资源的加载问题暴露的不是那么那么的明显，多上几个问题也至于太大，感官上并不会觉得慢了多多少。但是移动端，这种延时就比较明显了，如果把几个CSS和JS合并，那还是可以节约一些时间的；</p>
+<p>把所有的CSS资源合并为main.css,所有的JS资源合并位mian.js,加载截图如下：</p>
+<p><img src="http://linchaoblogimg.qiniudn.com/blogcombo.png" alt=""><br>时间下降到了2.61秒，相比第一步优化了0.48秒，优化了15.5%</p>
+<hr>
+<p>关于加载性能优化，可以做的很多，之前在PC上的优化方案，在手机端也是适用的。</p>
+<p>开发者可以使用谷歌提供的 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">PageSpeed Insights</a> 服务来查看前端页面的质量，然后根据他提出建议来优化网页。</p>
+<p>另外，我们马上就会提供一些前端的基础库的CDN给企业号的开发者使用，帮助大家提高加载速度。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://lin-chao.github.io/2014/11/22/移动前端开发基础与优化/" data-id="eqbwtdxza6wdb6e1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信企业号/">微信企业号</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-微信webview中的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/11/14/微信webview中的一些问题/" class="article-date">
@@ -85,7 +219,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Android_input[type=file]的问题">Android input[type=file]的问题</h3>
+        <p>这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。</p>
+<h3 id="Android_input[type=file]的问题">Android input[type=file]的问题</h3>
 <p>有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。</p>
 <p>首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。</p>
 <p>而在之前的版本的系统中，客户端如果需要对H5的 &lt;input&gt; 标签做支持，即在H5支持选择文件的功能，可以通过重写WebViewClient非public的<br>openFileChooser方法来实现。可在4.4.1/4.4.2系统中，该回调方法被废弃，客户端无法捕获用户在H5页面上对&lt;input&gt;标签的点击。</p>
@@ -114,7 +249,8 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
 <p>在做移动端开发的时候，通常建议使用更小更高效的 <a href="http://zeptojs.com/" target="_blank" rel="external">zepto</a> 来替代jQuery，作为基础库。</p>
 <p>但是，在非常旧版本的微信（微信4.5）中有一个问题，微信默认注入了zepto库，所以这时候如果开发者自己在引入一次，就会有一些问题。</p>
 <pre><code>建议：
-因为这么老版本的微信已经很少很少了，我们基本可以不关注，但是想要把工作做到<span class="number">100</span><span class="comment">%的开发者，请做下兼容处理，如果发现已经有zepto库在页面中，就不要引入自己的zepto库。</span>
+因为这么老版本的微信已经很少很少了，我们基本可以不关注，但是想要把工作做到<span class="number">100</span><span class="comment">%的开发者，请做下兼容处理，如果发现</span>
+已经有zepto库在页面中，就不要引入自己的zepto库。
 </code></pre><h3 id="微信和QQBrowser">微信和QQBrowser</h3>
 <p>目前，5.4以后Android微信，如果发现系统中已经安装了QQBrowser,那么会自动调用他的X5内核来作为webview的内核。</p>
 <pre><code>建议：
@@ -122,12 +258,12 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
 </code></pre><h3 id="HTML5某某API或者CSS3某某属性能不能用？">HTML5某某API或者CSS3某某属性能不能用？</h3>
 <p>首先这里，我们要明白一个问题，微信的webview很大程度上是依托于当前用户的手机系统中的浏览器的，所以某某属性API能不能用更多是由用户的系统决定的。这里推荐使用<a href="http://caniuse.com/" target="_blank" rel="external">Can i use</a> 检查。</p>
 <pre><code>建议：
-在使用前先检查所需要使用的API支持情况
+在使用前先检查所需要使用的API支持情况，并做好相关的测试工作。
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="msfgvbhw2ijwgrt9" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="119n5ht3klh2or7h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信企业号/">微信企业号</a></li></ul>
@@ -150,7 +286,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdev/">webdev</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信企业号/">微信企业号</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdev/">webdev</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信企业号/">微信企业号</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -159,7 +295,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/-webdev/" style="font-size: 10.00px;">-webdev</a><a href="/tags/-webdev-微信企业号/" style="font-size: 10.00px;">-webdev -微信企业号</a><a href="/tags/webdev/" style="font-size: 20.00px;">webdev</a><a href="/tags/webdev-微信企业号/" style="font-size: 10.00px;">webdev 微信企业号</a><a href="/tags/webdev-微信企业号/" style="font-size: 10.00px;">webdev,微信企业号</a><a href="/tags/微信企业号/" style="font-size: 15.00px;">微信企业号</a>
+      <a href="/tags/webdev/" style="font-size: 20.00px;">webdev</a><a href="/tags/微信企业号/" style="font-size: 10.00px;">微信企业号</a>
     </div>
   </div>
 
@@ -168,7 +304,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -178,6 +314,10 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/22/移动前端开发基础与优化/">移动前端开发基础与优化</a>
+          </li>
         
           <li>
             <a href="/2014/11/14/微信webview中的一些问题/">微信webview中的一些问题</a>

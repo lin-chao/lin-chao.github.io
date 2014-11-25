@@ -5,24 +5,27 @@
   
   <title>微信webview中的一些问题 | lin-chao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android input[type=file]的问题
+  <meta name="description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
+Android input[type=file]的问题
 有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
 首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要对H5的 &lt;input&gt; 标签做支持，即在H5支持选择文件的">
+而在之前的版本的系统中，客户端如果需要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信webview中的一些问题">
 <meta property="og:url" content="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/">
 <meta property="og:site_name" content="lin-chao">
-<meta property="og:description" content="Android input[type=file]的问题
+<meta property="og:description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
+Android input[type=file]的问题
 有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
 首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要对H5的 &lt;input&gt; 标签做支持，即在H5支持选择文件的">
+而在之前的版本的系统中，客户端如果需要">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信webview中的一些问题">
-<meta name="twitter:description" content="Android input[type=file]的问题
+<meta name="twitter:description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
+Android input[type=file]的问题
 有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
 首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要对H5的 &lt;input&gt; 标签做支持，即在H5支持选择文件的">
+而在之前的版本的系统中，客户端如果需要">
 
   
   
@@ -92,7 +95,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Android_input[type=file]的问题">Android input[type=file]的问题</h3>
+        <p>这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。</p>
+<h3 id="Android_input[type=file]的问题">Android input[type=file]的问题</h3>
 <p>有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。</p>
 <p>首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。</p>
 <p>而在之前的版本的系统中，客户端如果需要对H5的 &lt;input&gt; 标签做支持，即在H5支持选择文件的功能，可以通过重写WebViewClient非public的<br>openFileChooser方法来实现。可在4.4.1/4.4.2系统中，该回调方法被废弃，客户端无法捕获用户在H5页面上对&lt;input&gt;标签的点击。</p>
@@ -121,7 +125,8 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
 <p>在做移动端开发的时候，通常建议使用更小更高效的 <a href="http://zeptojs.com/" target="_blank" rel="external">zepto</a> 来替代jQuery，作为基础库。</p>
 <p>但是，在非常旧版本的微信（微信4.5）中有一个问题，微信默认注入了zepto库，所以这时候如果开发者自己在引入一次，就会有一些问题。</p>
 <pre><code>建议：
-因为这么老版本的微信已经很少很少了，我们基本可以不关注，但是想要把工作做到<span class="number">100</span><span class="comment">%的开发者，请做下兼容处理，如果发现已经有zepto库在页面中，就不要引入自己的zepto库。</span>
+因为这么老版本的微信已经很少很少了，我们基本可以不关注，但是想要把工作做到<span class="number">100</span><span class="comment">%的开发者，请做下兼容处理，如果发现</span>
+已经有zepto库在页面中，就不要引入自己的zepto库。
 </code></pre><h3 id="微信和QQBrowser">微信和QQBrowser</h3>
 <p>目前，5.4以后Android微信，如果发现系统中已经安装了QQBrowser,那么会自动调用他的X5内核来作为webview的内核。</p>
 <pre><code>建议：
@@ -129,12 +134,12 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
 </code></pre><h3 id="HTML5某某API或者CSS3某某属性能不能用？">HTML5某某API或者CSS3某某属性能不能用？</h3>
 <p>首先这里，我们要明白一个问题，微信的webview很大程度上是依托于当前用户的手机系统中的浏览器的，所以某某属性API能不能用更多是由用户的系统决定的。这里推荐使用<a href="http://caniuse.com/" target="_blank" rel="external">Can i use</a> 检查。</p>
 <pre><code>建议：
-在使用前先检查所需要使用的API支持情况
+在使用前先检查所需要使用的API支持情况，并做好相关的测试工作。
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="msfgvbhw2ijwgrt9" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="119n5ht3klh2or7h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信企业号/">微信企业号</a></li></ul>
@@ -144,6 +149,15 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   
     
 <nav id="article-nav">
+  
+    <a href="/2014/11/22/移动前端开发基础与优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          移动前端开发基础与优化
+        
+      </div>
+    </a>
   
   
     <a href="/2014/10/15/优雅且高效的使用Chrome-Developer-Tools下/" id="article-nav-older" class="article-nav-link-wrap">
@@ -166,7 +180,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdev/">webdev</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信企业号/">微信企业号</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdev/">webdev</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信企业号/">微信企业号</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -175,7 +189,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/-webdev/" style="font-size: 10.00px;">-webdev</a><a href="/tags/-webdev-微信企业号/" style="font-size: 10.00px;">-webdev -微信企业号</a><a href="/tags/webdev/" style="font-size: 20.00px;">webdev</a><a href="/tags/webdev-微信企业号/" style="font-size: 10.00px;">webdev 微信企业号</a><a href="/tags/webdev-微信企业号/" style="font-size: 10.00px;">webdev,微信企业号</a><a href="/tags/微信企业号/" style="font-size: 15.00px;">微信企业号</a>
+      <a href="/tags/webdev/" style="font-size: 20.00px;">webdev</a><a href="/tags/微信企业号/" style="font-size: 10.00px;">微信企业号</a>
     </div>
   </div>
 
@@ -184,7 +198,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -194,6 +208,10 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/22/移动前端开发基础与优化/">移动前端开发基础与优化</a>
+          </li>
         
           <li>
             <a href="/2014/11/14/微信webview中的一些问题/">微信webview中的一些问题</a>
