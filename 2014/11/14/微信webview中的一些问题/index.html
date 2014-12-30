@@ -6,26 +6,29 @@
   <title>微信webview中的一些问题 | lin-chao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
-Android input[type=file]的问题
-有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
-首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要">
+Android jsApi imagePreview
+使用这个api需要注意两点：
+
+如果是通过302/301来跳转显示图片，在Android下是不可用的，会获取不到图片的真实地址，前端的表现就是拉去不到图片；
+Android下这个api是另外起一个http去拉取图片的，所以不会带上cookie，并且和webview不会公用一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信webview中的一些问题">
 <meta property="og:url" content="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/">
 <meta property="og:site_name" content="lin-chao">
 <meta property="og:description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
-Android input[type=file]的问题
-有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
-首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要">
+Android jsApi imagePreview
+使用这个api需要注意两点：
+
+如果是通过302/301来跳转显示图片，在Android下是不可用的，会获取不到图片的真实地址，前端的表现就是拉去不到图片；
+Android下这个api是另外起一个http去拉取图片的，所以不会带上cookie，并且和webview不会公用一">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信webview中的一些问题">
 <meta name="twitter:description" content="这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。
-Android input[type=file]的问题
-有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。
-首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。
-而在之前的版本的系统中，客户端如果需要">
+Android jsApi imagePreview
+使用这个api需要注意两点：
+
+如果是通过302/301来跳转显示图片，在Android下是不可用的，会获取不到图片的真实地址，前端的表现就是拉去不到图片；
+Android下这个api是另外起一个http去拉取图片的，所以不会带上cookie，并且和webview不会公用一">
 
   
   
@@ -96,6 +99,12 @@ Android input[type=file]的问题
     <div class="article-entry" itemprop="articleBody">
       
         <p>这篇文章汇总了企业号的开发者反馈过来的微信webview中的一些问题。</p>
+<h3 id="Android_jsApi_imagePreview">Android jsApi imagePreview</h3>
+<p>使用这个api需要注意两点：</p>
+<ul>
+<li>如果是通过302/301来跳转显示图片，在Android下是不可用的，会获取不到图片的真实地址，前端的表现就是拉去不到图片；</li>
+<li>Android下这个api是另外起一个http去拉取图片的，所以不会带上cookie，并且和webview不会公用一套缓存，换言之，就是获取不到用户信息，并且即使webview中已经拉取过图片，使用这个jsApi也是会重新拉取一次的。</li>
+</ul>
 <h3 id="Android_input[type=file]的问题">Android input[type=file]的问题</h3>
 <p>有接到反馈，某某牌子的某某手机，微信webview中无法使用文件上传，的确是有这个问题的。</p>
 <p>首先，在Android 4.4.1/4.4.2系统中，webview不再回调WebViewClient.openFileChooser方法。</p>
@@ -139,7 +148,7 @@ Android下通过<span class="built_in">hash</span>来控制页面变化，不要
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="kik67ke4y92mfjlg" class="article-share-link">Share</a>
+      <a data-url="http://lin-chao.github.io/2014/11/14/微信webview中的一些问题/" data-id="1f079j15pyg574wu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webdev/">webdev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信企业号/">微信企业号</a></li></ul>
